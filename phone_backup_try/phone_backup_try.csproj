@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FD2FC37A-E591-46D3-BC08-32DC19D6F736}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>phone_backup_try</RootNamespace>
     <AssemblyName>phone_backup_try</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
