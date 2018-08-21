@@ -61,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HardCodedPaths.cs" />
+    <Compile Include="CodeFile1.cs" />
     <Compile Include="ConfiguratorForm.cs">
       <SubType>Form</SubType>
     </Compile>

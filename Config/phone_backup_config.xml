@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is for paths change to be accessible to everyone.-->
+<paths>
+	<whatsapp>
+		<images>
+			<sent>/sdcard/WhatsApp/Media/WhatsApp Images/Sent</sent>
+			<recieved>/sdcard/WhatsApp/Media/WhatsApp Images/</recieved>
+		</images>
+		<videos>
+			<sent>/sdcard/WhatsApp/Media/WhatsApp Video/Sent</sent>
+			<recieved>/sdcard/WhatsApp/Media/WhatsApp Video</recieved>
+		</videos>
+	</whatsapp>
+	<camera>/sdcard/DCIM/Camera</camera>
+	<temp>/sdcard/pictures/screenshots</temp>
+</paths>

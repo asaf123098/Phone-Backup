@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using phone_backup_try.Commands;
+using phone_backup_try;
 
 
 
-public class BackupForm : Form
+public class MainWindow : Form
 {
     private Button copyButton;
     private TreeView checkBoxes;
@@ -15,10 +15,10 @@ public class BackupForm : Form
     private TextBox destinationPath;
     private Button browse;
 
-    public BackupForm()
+    public MainWindow()
     {
         this.InitializeComponent();
-        //MessageBox.Show(this.checkBoxes.Nodes[0].Nodes[0].FullPath);///////////////check this!!!!!!!!/////////////////
+        MessageBox.Show(this.checkBoxes.Nodes[0].Nodes[0].FullPath);///////////////check this!!!!!!!!/////////////////
     }
     private void InitializeComponent()
     {
@@ -26,7 +26,7 @@ public class BackupForm : Form
         this.SuspendLayout();
         this.SetCheckBoxes();
         this.SetButtons();
-        this.SetPaths();
+        this.SetPathControls();
 
         // 
         // Form1
@@ -35,13 +35,6 @@ public class BackupForm : Form
         this.MinimumSize = new Size(700, 300);
         this.Name = "BackupForm";
         this.ResumeLayout(false);
-    }
-
-    [STAThread]
-    public static void Main()
-    {
-        Application.EnableVisualStyles();
-        Application.Run(new BackupForm());
     }
 
     private void Copy_Button_OnClick(object sender, EventArgs e)
@@ -116,7 +109,7 @@ public class BackupForm : Form
         this.checkBoxes.AfterCheck += new TreeViewEventHandler(CheckBoxes_AfterCheck);//What is that?
 
     }
-    private void SetPaths()
+    private void SetPathControls()
     {
         this.destination = new Label();
         this.destinationPath = new TextBox();

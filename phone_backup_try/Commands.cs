@@ -3,45 +3,29 @@ using System.Diagnostics;
 using System.Xml;
 
 
-namespace phone_backup_try.Commands
+namespace phone_backup_try
 {
-    public static class Commands
+    static public class Commands
     {
-        public const string WHATSAPP_SENT_IMAGES_PATH = "/paths/whatsapp/images/sent";
-        public const string WHATSAPP_SENT_VIDEOS_PATH = "/paths/whatsapp/videos/sent";
-        public const string WHATSAPP_RECIEVED_IMAGES_PATH = "/paths/whatsapp/images/recieved";
-        public const string WHATSAPP_RECIEVED_VIDEOS_PATH = "/paths/whatsapp/videos/recieved";
-        public const string CAMERA_IMAGES_PATH = "/paths/camera";
-        private const string XML_PATHS_CONFIG = "C:\\Users\\Asaf\\Desktop\\PhoneBackupApp\\phone_backup_config.xml";
-        private const string BACKUP_PROCESS_PATH = "C:\\Users\\Asaf\\Desktop\\PhoneBackupApp\\try.cmd";
-
-        public static void runBackup(string backup_item_request, string target_path)
-        {
-            XmlDocument phone_backup_config = new XmlDocument();
-            phone_backup_config.Load(XML_PATHS_CONFIG);
-
-            XmlNode requested_path = phone_backup_config.DocumentElement.SelectSingleNode(backup_item_request);
-
-            ExecuteCommandSync(requested_path.InnerText, target_path);
-        }
-        public static void ExecuteCommandSync(string origin, string dest)
+        static public void RunAdbBatch(string originPath, string destinationPath)
         {
             int exitCode;
             ProcessStartInfo processInfo;
             Process process;
 
-            processInfo = new ProcessStartInfo(BACKUP_PROCESS_PATH);
+            // Set the batch file process and give it args.
+            processInfo = new ProcessStartInfo(HardCodedPaths.BACKUP_PROCESS_PATH);
             processInfo.CreateNoWindow = false;
             processInfo.UseShellExecute = false;
-            processInfo.Arguments = String.Format("{0} {1}", origin, dest);
+            processInfo.Arguments = String.Format("{0} {1}", originPath, destinationPath);
 
-            // *** Redirect the output ***
+            // Redirect the output.
             processInfo.RedirectStandardError = true;
             processInfo.RedirectStandardOutput = true;
 
             process = Process.Start(processInfo);
 
-            // *** Read the streams ***
+            // Read the streams.
             process.OutputDataReceived += (object sender, DataReceivedEventArgs e) =>
             Console.WriteLine("output>>" + e.Data);
             process.BeginOutputReadLine();
@@ -54,6 +38,21 @@ namespace phone_backup_try.Commands
 
             Console.WriteLine("ExitCode: {0}", process.ExitCode);
             process.Close();
+        }
+
+
+        static public void runBackup(string backup_item_request, string target_path)
+        {
+            XmlDocument configXml;
+            XmlNode requested_path;
+
+
+            configXml = new XmlDocument();
+            configXml.Load(HardCodedPaths.CONFIG_XML_PATH);
+
+            requested_path = configXml.DocumentElement.SelectSingleNode(backup_item_request);
+
+            RunAdbBatch(requested_path.InnerText, target_path);
         }
     }
 }
